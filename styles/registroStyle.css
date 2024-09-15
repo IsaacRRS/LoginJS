@@ -104,6 +104,12 @@ a:hover {
     color: rgb(51, 49, 49);
 }
 
+form div.erro label {
+    background-color: rgb(225, 25, 25);
+}
+form div.erro input {
+    border-color: rgb(225, 25, 25);
+}
 @media(max-width: 1100px){
     .caixa {
         width: min(600px, 100%);
