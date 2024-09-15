@@ -5,40 +5,42 @@ const senhaID = document.getElementById('senhaID');
 const repetirID = document.getElementById('repetirID');
 const erroMensagem = document.getElementById('mensagemErro');
 
+// após obter as referências com base nos IDs, vamos lidar com o envio..
+
 formID.addEventListener('submit', (e) => {
 
-    let erros = [];
+    let erros = [];  // armazenar
 
-    if (nomeID) {
+    if (nomeID) {  // caso o campo com 'nomeID' exista, chama a função para validação de registro
         erros = errosRegistro(nomeID.value, emailID.value, senhaID.value, repetirID.value);
     }
-    else {
+    else { // caso contrário, chama a função para validar o login
         erros = errosLogin(emailID.value, senhaID.value);
     }
 
-    if (erros.length > 0) {
+    if (erros.length > 0) {  // previnir o envio e imprimir mensagem caso haja erro   
         e.preventDefault();
         erroMensagem.innerText = erros.join(". ");
     }
 });
 
-const Campos = [nomeID, emailID, senhaID, repetirID].filter(input != null) 
+const Campos = [nomeID, emailID, senhaID, repetirID].filter(input != null) // array para filtrar campos que não são nulos
 
-Campos.forEach('input', ()  => {
+Campos.forEach('input', ()  => { // para cada input, adiciona um ouvinte,
 
-    input.addEventListener('input', () => {
+    input.addEventListener('input', () => { // remove a estilização de erro se necessário
 
         if(input.parentElement.classList.contains('erro')){
 
             input.parentElement.classList.remove('erro')
 
-            erroMensagem.innerText = ''
+            erroMensagem.innerText = '' // limpar mensagem de erro
 
         }
     })
 })
 
-function errosRegistro(nome, email, senha, repetir) {
+function errosRegistro(nome, email, senha, repetir) { // função para registro; verificar se os campos estão vazios, enviando mensagem e estilo caso haja erro
 
     let erros = [];
 
@@ -66,7 +68,7 @@ function errosRegistro(nome, email, senha, repetir) {
     return erros;
 }
 
-function errosLogin(email, senha){
+function errosLogin(email, senha){ // função para login; verificar se os campos estão vazios, enviando mensagem e estilo caso haja erro
 
     let erros = []
 
