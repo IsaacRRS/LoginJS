@@ -5,6 +5,39 @@ const senhaID = document.getElementById('senhaID');
 const repetirID = document.getElementById('repetirID');
 const erroMensagem = document.getElementById('mensagemErro');
 
+formID.addEventListener('submit', (e) => {
+
+    let erros = [];
+
+    if (nomeID) {
+        erros = errosRegistro(nomeID.value, emailID.value, senhaID.value, repetirID.value);
+    }
+    else {
+        erros = errosLogin(emailID.value, senhaID.value);
+    }
+
+    if (erros.length > 0) {
+        e.preventDefault();
+        erroMensagem.innerText = erros.join(". ");
+    }
+});
+
+const Campos = [nomeID, emailID, senhaID, repetirID].filter(input != null) 
+
+Campos.forEach('input', ()  => {
+
+    input.addEventListener('input', () => {
+
+        if(input.parentElement.classList.contains('erro')){
+
+            input.parentElement.classList.remove('erro')
+
+            erroMensagem.innerText = ''
+
+        }
+    })
+})
+
 function errosRegistro(nome, email, senha, repetir) {
 
     let erros = [];
